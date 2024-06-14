@@ -11,6 +11,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.compose.rememberNavController
+import com.abhi.ieee.Navigation.NavGraph
+import com.abhi.ieee.Screens.StartScreen
 import com.abhi.ieee.ui.theme.IEEETheme
 
 class MainActivity : ComponentActivity() {
@@ -19,29 +22,14 @@ class MainActivity : ComponentActivity() {
         enableEdgeToEdge()
         setContent {
             IEEETheme {
-                Scaffold(modifier = Modifier.fillMaxSize()) { innerPadding ->
-                    Greeting(
-                        name = "IEEE",
-                        modifier = Modifier.padding(innerPadding)
-                    )
-                }
+
+                val navController = rememberNavController()
+                NavGraph(navHostController = navController)
+
+
+               // StartScreen()
             }
         }
     }
 }
 
-@Composable
-fun Greeting(name: String, modifier: Modifier = Modifier) {
-    Text(
-        text = "Hello $name!",
-        modifier = modifier
-    )
-}
-
-@Preview(showBackground = true)
-@Composable
-fun GreetingPreview() {
-    IEEETheme {
-        Greeting("IEEE")
-    }
-}
