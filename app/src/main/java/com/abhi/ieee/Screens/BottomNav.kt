@@ -20,6 +20,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
@@ -41,7 +42,7 @@ fun BottomNav(navHostController: NavHostController){
         NavHost(navController = navController1 , startDestination = Routes.Home.route ,
             modifier = Modifier.padding(innerPadding)){
             composable(Routes.Home.route){
-                Home()
+                Home(navController1)
             }
             composable(Routes.Events.route){
                 Events()
@@ -87,7 +88,7 @@ fun MyBottomBar(navController1: NavHostController) {
     )
 
 
-    BottomAppBar{
+    BottomAppBar(containerColor = Color.White, contentColor = Color.White){
         list.forEach{
             val selected = it.title == backStackEntry.value?.destination?.route
 
@@ -98,15 +99,12 @@ fun MyBottomBar(navController1: NavHostController) {
                     }
                     launchSingleTop = true
                 } },
-                icon = {
-                    if(selected){
-                        Icon(imageVector = it.selectedIcon, contentDescription = it.title)
-                    }
-                    else{
-                        Icon(imageVector = it.unSelectedIcon, contentDescription = it.title)
-                    }
-                },
-                label = { Text(text = it.title)})
+                icon = { Icon(
+                    imageVector = it.selectedIcon,
+                    contentDescription = it.title,
+                    tint = if (selected) Color.White else Color.Black // Set icon color based on selection
+                )},
+                label = { Text(text = it.title, color = Color.Black)})
         }
     }
 

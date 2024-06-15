@@ -18,7 +18,7 @@ import androidx.compose.ui.graphics.Color
 @Composable
 fun PageIndicator(size: Int, pagerState: Int){
     Row(horizontalArrangement = Arrangement.SpaceBetween,
-        modifier = Modifier.padding(bottom = 100.dp)){
+        modifier = Modifier.padding(10.dp)){
 
         repeat(size){
             Indicator(isSelected = it == pagerState)

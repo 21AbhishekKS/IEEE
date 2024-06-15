@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -29,8 +30,8 @@ import com.abhi.ieee.helper.LottieLoader
 @Preview(showBackground = true)
 @Composable
 fun AnnouncementCard(
-    title: String = "Title",
-    info: String = "new Announcementnew Announcemennew Announcemen"){
+    title: String = "ComingSoon",
+    info: String = "Something exciting is brewing! Stay tuned for upcoming updates"){
         Column(
             Modifier
                 .padding(15.dp)
@@ -44,11 +45,11 @@ fun AnnouncementCard(
                         0.0f to Color(0xFF0F0C29),
                         1.0f to Color(0xFF24243E),
 
-                    //    0.0f to Color(0xFF141E30),
-                      //  1.0f to Color(0xFF243B55),
+                        //    0.0f to Color(0xFF141E30),
+                        //  1.0f to Color(0xFF243B55),
 
 
-                        )
+                    )
                 )
                 .padding(15.dp),
 
@@ -57,8 +58,14 @@ fun AnnouncementCard(
         ) {
 
             Row(verticalAlignment = Alignment.CenterVertically){
-            Column(modifier = Modifier.fillMaxWidth(.7f),
-            ) {
+
+                Column(modifier = Modifier.fillMaxWidth(.3f),
+                ) {
+                    LottieLoader(modifier = Modifier.size(150.dp), image = R.raw.announce )
+                }
+
+
+            Column() {
                 Text(
                     text = title,
                     style = MaterialTheme.typography.headlineMedium,
@@ -72,7 +79,7 @@ fun AnnouncementCard(
 
             }
 
-                LottieLoader(modifier = Modifier.height(150.dp), image = R.raw.innovaiton )
+
 
 
 

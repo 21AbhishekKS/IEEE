@@ -42,7 +42,9 @@ import kotlinx.coroutines.delay
 @OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun Events(){
+Column(Modifier.fillMaxSize().background(Color.White)) {
 
+}
 
    // Text("Events")
 
