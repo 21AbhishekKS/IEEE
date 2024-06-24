@@ -102,8 +102,7 @@ fun StartScreen(navController: NavHostController){
             
             Text(modifier = Modifier.fillMaxWidth(),
                 textAlign = TextAlign.Center,
-                text = "Join us on this exciting journey of exploration, discovery and growth" +
-                        "Join us on this exciting journey of exploration, discovery and growth",
+                text = "Join us on this exciting journey of exploration, discovery and growth",
                 fontSize = 14.sp,
                 color = Color.LightGray,
                 fontWeight = FontWeight.Thin

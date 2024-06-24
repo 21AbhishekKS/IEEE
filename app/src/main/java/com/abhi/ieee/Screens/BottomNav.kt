@@ -15,6 +15,7 @@ import androidx.compose.material.icons.outlined.List
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
+import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -45,7 +46,7 @@ fun BottomNav(navHostController: NavHostController){
                 Home(navController1)
             }
             composable(Routes.Events.route){
-                Events()
+                Events(navController1)
             }
             composable(Routes.Results.route){
                 Results()
@@ -75,11 +76,7 @@ fun MyBottomBar(navController1: NavHostController) {
             Icons.Filled.DateRange,
             Icons.Outlined.DateRange
         ),
-    BottomNavItem(
-            "Results",
-            Icons.Filled.List,
-            Icons.Outlined.List
-        ),
+    
     BottomNavItem(
             "AboutUs",
             Icons.Filled.Info,
@@ -92,7 +89,11 @@ fun MyBottomBar(navController1: NavHostController) {
         list.forEach{
             val selected = it.title == backStackEntry.value?.destination?.route
 
-            NavigationBarItem(selected = selected,
+            NavigationBarItem(
+                colors = NavigationBarItemDefaults.colors(
+                    indicatorColor =  Color(84, 75, 100, 255),
+                ),
+                selected = selected,
                 onClick = { navController1.navigate(it.title){
                     popUpTo(navController1.graph.findStartDestination().id){
                         saveState = true

@@ -12,8 +12,8 @@ android {
         applicationId = "com.abhi.ieee"
         minSdk = 21
         targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        versionCode = 3
+        versionName = "1.2.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -77,11 +77,21 @@ dependencies {
 
 
     //firebase
+
+
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
-    implementation("com.google.firebase:firebase-analytics")
+   // implementation("com.google.firebase:firebase-analytics")
     implementation("com.google.firebase:firebase-database")
     implementation("com.google.firebase:firebase-firestore")
     implementation("com.google.firebase:firebase-storage")
+
+    //livedata
+    //implementation ("androidx.compose.runtime:runtime-livedata:2.8.1")
+
+
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.8")
+
+
 
 
 }

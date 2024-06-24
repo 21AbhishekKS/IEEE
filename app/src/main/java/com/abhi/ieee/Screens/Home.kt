@@ -5,7 +5,7 @@ import androidx.compose.animation.core.tween
 import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
-import androidx.compose.foundation.border
+import androidx.compose.foundation.horizontalScroll
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -14,59 +14,62 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.pager.HorizontalPager
 import androidx.compose.foundation.pager.rememberPagerState
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
-import androidx.compose.material3.CardElevation
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.livedata.observeAsState
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.shadow
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import com.abhi.ieee.FireBase.dataClass.AnnouncementData
 import com.abhi.ieee.Navigation.Routes
-import com.abhi.ieee.ViewModel.HomeScreenViewModel
 import com.abhi.ieee.utils.AnnouncementCard
 import com.abhi.ieee.utils.PageIndicator
 import kotlinx.coroutines.delay
 import com.abhi.ieee.R
-
-@OptIn(ExperimentalFoundationApi::class, ExperimentalMaterial3Api::class)
+import com.abhi.ieee.ViewModel.AnnouncementViewModel
+import com.abhi.ieee.utils.EventCard
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalFoundationApi::class)
 @Composable
 fun Home(
-    navController : NavHostController,
-    homeScreenViewModel: HomeScreenViewModel = viewModel()
+    navController : NavHostController
+
 ){
 
 
-    var announcementData = homeScreenViewModel.state
+    val homeViewModel  : AnnouncementViewModel = viewModel()
 
-    if (announcementData.isEmpty()) {
-        announcementData.addAll(0,
-            listOf(
-                AnnouncementData("ComingSoon ", "Something exciting is brewing! Stay tuned for upcoming updates "),
-                AnnouncementData("UpdateAlert", "We've got a secret... but we can't keep it quiet for much longer!"),
 
-            ))
-    }
+    val announcements by homeViewModel.announcements.observeAsState(null)
+
+
+    val scrollableState = rememberScrollState()
+
+    var announcementData = announcements ?: listOf(AnnouncementData("title" , "Disc"))
+
+
 
 
 
     val pagerState = rememberPagerState(
         initialPage = 0,
-        pageCount = { announcementData.size }
+        pageCount = { announcementData.size  }
     )
 
     LaunchedEffect(Unit) {
@@ -84,11 +87,25 @@ fun Home(
     }
 
 
+    //---------------------Announcement-------------------------------------
+
     Column(
         Modifier
             .fillMaxSize()
             .background(Color.White),
-        horizontalAlignment = Alignment.CenterHorizontally){
+        horizontalAlignment = Alignment.CenterHorizontally,
+        verticalArrangement = Arrangement.SpaceBetween){
+
+        Row(
+            Modifier
+                .fillMaxWidth()
+                .padding(vertical = 10.dp, horizontal = 20.dp)
+                .background(Color.White)) {
+            Text(text = "Announcements" ,
+                color =  Color.Black ,
+                fontWeight = FontWeight.Bold ,
+                fontSize = 25.sp)
+        }
 
 
         Box(
@@ -106,20 +123,30 @@ fun Home(
                         .background(Color.White)
                     //.padding(10.dp)
                 ) { currentPager ->
-                    AnnouncementCard(
-                        announcementData.get(currentPager).title,
-                        announcementData.get(currentPager).description
-                    )
+                    if (announcementData != null) {
+                        AnnouncementCard(
+                            announcementData.get(currentPager).title,
+                            announcementData.get(currentPager).description
+                        )
+                    }
 
                 }
 
-                PageIndicator(announcementData.size, pagerState.currentPage)
+                if (announcementData != null) {
+                    PageIndicator(announcementData.size, pagerState.currentPage)
+                }
             }
 
         }
 
+
+
+        // -------------------Row of Cards with functions ---------------------------------
+
            Row(
                Modifier
+                   .padding(10.dp)
+                   .background(Color.White)
                    .fillMaxWidth()
                    .wrapContentHeight(),
             horizontalArrangement = Arrangement.Absolute.SpaceEvenly) {
@@ -138,7 +165,10 @@ fun Home(
             }
 
             Card(colors = CardDefaults.cardColors(Color.White),
-                elevation = CardDefaults.elevatedCardElevation(5.dp)
+                elevation = CardDefaults.elevatedCardElevation(5.dp),
+                onClick = {
+                    homeViewModel.saveData("Announcement" , "adf" ,"fa")
+                }
             ) {
             Column(
                 Modifier
@@ -176,45 +206,60 @@ fun Home(
          }
 
 
+        //------------------Events Rew with cards-----------------------
+
+
+        Row(
+            Modifier
+                .padding(start = 20.dp, top = 20.dp)
+                .fillMaxWidth(),
+            horizontalArrangement = Arrangement.Start) {
+            Text(text ="Events" ,
+                color = Color.Black,
+                fontSize = 22.sp,
+                fontWeight = FontWeight.Bold)
+        }
+
+
+
+        Row(
+            Modifier
+                .padding(10.dp)
+                .fillMaxWidth()
+                .horizontalScroll(scrollableState),
+            horizontalArrangement = Arrangement.Absolute.SpaceEvenly) {
+
+            EventCard(R.drawable.pixel_puzzel , "pixel puzzle")
+            EventCard(R.drawable.front_frezy , "FrontEnd Fr..")
+            EventCard(R.drawable.t_humt , "Go get it")
+
+
+            Column(
+                Modifier
+                    .width(150.dp)
+                    .height(200.dp)
+                    .padding(8.dp),
+                horizontalAlignment = Alignment.Start,
+                verticalArrangement = Arrangement.Center) {
+                TextButton(onClick = { navController.navigate(Routes.Events.route) }) {
+                    Text(
+                        text = "View All",
+                        color = Color.Black,
+                        fontSize = 18.sp,
+                        fontWeight = FontWeight.Bold
+                    )
+                }
+
+            }
+        }
+
+
+
+
+
+
+
 
     }
 
 }
-
-
-// Box(Modifier.fillMaxSize(), contentAlignment = Alignment.BottomStart) {
-//
-//
-//            Surface(
-//                color = Color(0x4E, 0x12, 0x69, 0xFF),
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .fillMaxHeight(.45f)
-//                    .align(Alignment.TopStart)) {
-//
-//                Column(Modifier.padding(10.dp)
-//                    .fillMaxHeight(),
-//                    verticalArrangement = Arrangement.Top,
-//                    horizontalAlignment = Alignment.CenterHorizontally){
-//                    LottieLoader(
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                            .fillMaxHeight(.8f),
-//                        image = R.raw.innovaiton )
-//                }
-//
-//
-//
-//
-//            }
-//            Surface(color = Color.White,
-//                modifier = Modifier
-//                    .fillMaxWidth()
-//                    .fillMaxSize(.65f),
-//                shape = RoundedCornerShape(topStart = 60.dp )
-//            ) {
-//
-//            }
-//
-//
-//    }
