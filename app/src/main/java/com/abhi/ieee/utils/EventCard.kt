@@ -38,16 +38,37 @@ fun EventCard(image : Int , title : String) {
             Modifier
                 .padding(8.dp),
             horizontalAlignment = Alignment.CenterHorizontally) {
-            Image(
-                painter = painterResource(id = image),
-                contentDescription = "Pixel Puzzle event image",
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .fillMaxHeight(.85f)
 
-            )
+          //Image(
+            //                painter = painterResource(id = image),
+            //                contentDescription = "Pixel Puzzle event image",
+            //                modifier = Modifier
+            //                    .fillMaxWidth()
+            //                    .fillMaxHeight(.85f)
+            //
+            //            )
 
-                Text(
+
+
+            Text(
+                    text = title,
+                    color = Color.Black,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            Text(
+                    text = title,
+                    color = Color.Black,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            Text(
+                    text = title,
+                    color = Color.Black,
+                    fontSize = 18.sp,
+                    fontWeight = FontWeight.Bold
+                )
+            Text(
                     text = title,
                     color = Color.Black,
                     fontSize = 18.sp,

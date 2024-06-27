@@ -1,29 +1,25 @@
 package com.abhi.ieee.Screens
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.DateRange
-import androidx.compose.material.icons.filled.Face
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Info
-import androidx.compose.material.icons.filled.List
 import androidx.compose.material.icons.outlined.DateRange
-import androidx.compose.material.icons.outlined.Face
 import androidx.compose.material.icons.outlined.Home
 import androidx.compose.material.icons.outlined.Info
-import androidx.compose.material.icons.outlined.List
 import androidx.compose.material3.BottomAppBar
 import androidx.compose.material3.Icon
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.navigation.NavGraph.Companion.findStartDestination
-import androidx.navigation.NavHost
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -33,6 +29,7 @@ import com.abhi.ieee.Model.BottomNavItem
 import com.abhi.ieee.Navigation.Routes
 
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun BottomNav(navHostController: NavHostController){
 
@@ -54,6 +51,28 @@ fun BottomNav(navHostController: NavHostController){
             composable(Routes.AboutUs.route){
                 AboutUs()
             }
+            composable(Routes.EventShowScreen.route + "?description={description}&title={title}&members={members}&activeStatus={activeStatus}&first={first}&second={second}&third={third}&link={link}&date={date}"){
+                var description = it.arguments?.getString("description")
+                var title = it.arguments?.getString("title")
+                var members = it.arguments?.getString("members")
+                var activeStatus = it.arguments?.getString("activeStatus")
+                var first = it.arguments?.getString("first")
+                var second = it.arguments?.getString("second")
+                var third = it.arguments?.getString("third")
+                var link = it.arguments?.getString("link")
+                var date = it.arguments?.getString("date")
+
+                //  AddScreen(moneyViewModel , description ?: "" , amount ?: "" , updateMode?: false)
+
+
+                    EventShowScreen(description ?: "" , title ?: "",
+                        members ?: "", activeStatus ?: "" , first ?: "",
+                        (second ?: "").toString(), (third ?: "").toString() , link?: "" ,date?: ""
+                    )
+
+
+            }
+
         }
 
     }

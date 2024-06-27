@@ -1,5 +1,7 @@
 package com.abhi.ieee.Navigation
 
+import android.os.Build
+import androidx.annotation.RequiresApi
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
@@ -11,6 +13,7 @@ import com.abhi.ieee.Screens.Home
 import com.abhi.ieee.Screens.Results
 import com.abhi.ieee.Screens.StartScreen
 
+@RequiresApi(Build.VERSION_CODES.N)
 @Composable
 fun NavGraph(navHostController: NavHostController){
 

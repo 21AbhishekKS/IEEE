@@ -70,7 +70,8 @@ fun StartScreen(navController: NavHostController){
         LottieAnimation(
             modifier = Modifier.fillMaxSize(),
             composition = composition.value,
-            progress = {progress})
+            progress = {progress}
+        )
 
 
         Column(modifier = Modifier
@@ -88,15 +89,6 @@ fun StartScreen(navController: NavHostController){
                 fontWeight = FontWeight.Bold
             )
 
-            //Text(modifier = Modifier
-            //                .fillMaxWidth()
-            //                .padding(5.dp),
-            //                textAlign = TextAlign.Start,
-            //                text = "JNNCE",
-            //                fontSize = 30.sp,
-            //                color = Color.White,
-            //                fontWeight = FontWeight.Bold
-            //            )
 
             Spacer(modifier =Modifier.height(6.dp))
             
