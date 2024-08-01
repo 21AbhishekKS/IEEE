@@ -5,15 +5,15 @@ plugins {
 }
 
 android {
-    namespace = "com.abhi.ieee"
+    namespace = "com.abhi.IEEE"
     compileSdk = 34
 
     defaultConfig {
-        applicationId = "com.abhi.ieee"
+        applicationId = "com.abhi.IEEE"
         minSdk = 21
         targetSdk = 34
-        versionCode = 3
-        versionName = "1.2.1"
+        versionCode = 5
+        versionName = "1.3.1"
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -80,18 +80,15 @@ dependencies {
 
 
     implementation(platform("com.google.firebase:firebase-bom:33.1.0"))
-   // implementation("com.google.firebase:firebase-analytics")
-    implementation("com.google.firebase:firebase-database")
-    implementation("com.google.firebase:firebase-firestore")
-    implementation("com.google.firebase:firebase-storage")
 
-    //livedata
-    //implementation ("androidx.compose.runtime:runtime-livedata:2.8.1")
+    implementation("com.google.firebase:firebase-database")
+  
 
 
     implementation("androidx.compose.runtime:runtime-livedata:1.6.8")
 
-
+//Splash screen
+    implementation ("androidx.core:core-splashscreen:1.0.1")
 
 
 }

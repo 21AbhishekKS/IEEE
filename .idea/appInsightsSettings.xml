@@ -8,10 +8,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="com.abhi.ieee" />
-                  <option name="mobileSdkAppId" value="1:749172433974:android:5959926c4c3c33cbe66497" />
-                  <option name="projectId" value="ieee-ab6db" />
-                  <option name="projectNumber" value="749172433974" />
+                  <option name="appId" value="PLACEHOLDER" />
+                  <option name="mobileSdkAppId" value="" />
+                  <option name="projectId" value="" />
+                  <option name="projectNumber" value="" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
